@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVYX — The Web, Reimagined</title>
+  <meta name="description" content="NOVYX Tools — a collection of useful online tools.">
+  <style>
+    :root {
+      --bg: #080b18;
+      --panel: #11172a;
+      --text: #f4f7ff;
+      --muted: #a8b2ce;
+      --cyan: #00e5ff;
+      --violet: #8b5cf6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    header {
+      padding: 22px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid #252b43;
+    }
+
+    .logo {
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: var(--cyan);
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      margin-left: 18px;
+    }
+
+    .hero {
+      padding: 75px 7% 55px;
+      text-align: center;
+      background: radial-gradient(ellipse at top, #182653, var(--bg) 68%);
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 7vw, 72px);
+      margin: 0 0 18px;
+    }
+
+    .hero h1 span {
+      color: var(--cyan);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .button {
+      display: inline-block;
+      border: 0;
+      border-radius: 9px;
+      padding: 13px 20px;
+      margin: 8px 4px;
+      color: #06101c;
+      background: var(--cyan);
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .secondary {
+      background: #242b45;
+      color: var(--text);
+    }
+
+    section {
+      padding: 35px 7%;
+    }
+
+    h2 { font-size: 30px; }
+
+    .muted { color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 22px;
+      border: 1px solid #252d49;
+      border-radius: 15px;
+      background: var(--panel);
+    }
+
+    .card h3 { margin-top: 0; }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #303957;
+      color: var(--text);
+      background: #090e20;
+      font: inherit;
+    }
+
+    textarea { min-height: 100px; resize: vertical; }
+
+    .output {
+      padding: 12px;
+      margin-top: 10px;
+      background: #080d1b;
+      border-radius: 8px;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .tool { margin-top: 18px; }
+
+    footer {
+      padding: 30px 7%;
+      margin-top: 30px;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid #252b43;
+    }
+
+    @media (max-width: 600px) {
+      header { flex-direction: column; }
+      nav a { margin: 0 7px; }
+      .hero { padding-top: 55px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">NOVYX</div>
+  <nav>
+    <a href="#tools">Tools</a>
+    <a href="#ai">NOVYX AI</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>The Web, <span>Reimagined.</span></h1>
+    <p>A growing collection of useful digital tools, built for everyone.</p>
+    <a class="button" href="#tools">Explore Tools</a>
+    <a class="button secondary" href="#ai">Explore NOVYX AI</a>
+  </section>
+
+  <section id="ai">
+    <h2>NOVYX AI</h2>
+    <p class="muted">Our AI assistant interface is a prototype. A real AI model is not connected yet.</p>
+    <div class="card">
+      <div id="chat" class="output">Welcome to NOVYX AI. The AI engine is currently in development.</div>
+      <form id="chatForm">
+        <input id="question" placeholder="Type a message..." required>
+        <button class="button" type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="tools">
+    <h2>15 Free Tools</h2>
+    <p class="muted">Simple utilities you can use in your browser.</p>
+
+    <div class="grid">
+      <article class="card tool">
+        <h3>1. Word Counter</h3>
+        <textarea id="words" placeholder="Enter your text..."></textarea>
+        <div class="output" id="wordResult">Words: 0 | Characters: 0</div>
+      </article>
+
+      <article class="card tool">
+        <h3>2. Text Formatter</h3>
+        <textarea id="formatInput" placeholder="Enter text..."></textarea>
+        <button class="button" onclick="formatText('upper')">UPPERCASE</button>
+        <button class="button secondary" onclick="formatText('lower')">lowercase</button>
+        <div class="output" id="formatOutput"></div>
+      </article>
+
+      <article class="card tool">
+        <h3>3. JSON Formatter</h3>
+        <textarea id="jsonInput" placeholder='{"name":"NOVYX"}'></textarea>
+        <button class="button" onclick="formatJSON()">Format JSON</button>
+        <div class="output" id="jsonOutput"></div>
+      </article>
+
+      <article class="card tool">
+        <h3>4. Percentage Calculator</h3>
+        <input id="percentValue" type="number" placeholder="Enter number">
+        <input id="percentRate" type="number" placeholder="Percentage">
+        <button class="button" onclick="calculatePercent()">Calculate</button>
+        <div class="output" id="percentOutput"></div>
+      </article>
+
+      <article class="card tool">
+        <h3>5. Unit Converter</h3>
+        <input id="kmValue" type="number" placeholder="Kilometres">
+        <button class="button" onclick="convertKm()">Convert to miles</button>
+        <div class="output" id="kmOutput"></div>
+      </article>
+
+      <article class="card tool">
+        <h3>6. Base64 Encoder</h3>
+        <textarea id="baseInput" placeholder="Enter text..."></textarea>
+        <button class="button" onclick="base64Encode()">Encode</button>
+        <div class="output" id="baseOutput"></div>
+      </article>
+
+      <article class="card tool">
+        <h3>7. HEX to RGB</h3>
+        <input id="hexInput" value="#00e5ff" placeholder="#00e5ff">
+        <button class="button" onclick="hexToRGB()">Convert</button>
+        <div class="output" id="hexOutput"></div>
+      </article>
+
+      <article class="card tool">
+        <h3>8. HTML Preview</h3>
+        <textarea id="htmlInput" placeholder="<h1>Hello NOVYX</h1>"></textarea>
+        <button class="button" onclick="previewHTML()">Preview</button>
+        <iframe id="htmlPreview" title="HTML preview"
+          sandbox="" style="width:100%;height:180px;background:white;border:0;border-radius:8px"></iframe>
+      </article>
+
+      <article class="card tool">
+        <h3>9. Timestamp Converter</h3>
+        <input id="timestampInput" type="number" placeholder="Unix timestamp in seconds">
+        <button class="button" onclick="convertTimestamp()">Convert</button>
+        <div class="output" id="timestampOutput"></div>
+      </article>
+
+      <article class="card tool">
+        <h3>10. Password Generator</h3>
+        <input id="passwordLength" type="number" min="8" max="64" value="16">
+        <button class="button" onclick="generatePassword()">Generate</button>
+        <div class="output" id="passwordOutput"></div>
+      </article>
+
+      <article class="card tool">
+        <h3>11. CSS Gradient Generator</h3>
+        <label for="colorOne">First colour</label>
+        <input id="colorOne" type="color" value="#080b18">
+        <label for="colorTwo">Second colour</label>
+        <input id="colorTwo" type="color" value="#8b5cf6">
+        <div id="gradientPreview" style="height:80px;border-radius:8px"></div>
+        <button class="button" onclick="makeGradient()">Generate</button>
+        <div class="output" id="gradientOutput"></div>
+      </article>
+
+      <article class="card tool">
+        <h3>12. Image Resizer</h3>
+        <input id="resizeImage" type="file" accept="image/*">
+        <input id="resizeWidth" type="number" min="1" value="500" placeholder="Width in pixels">
+        <button class="button" onclick="resizeImageFile()">Resize Image</button>
+        <a id="resizeDownload" class="button secondary" hidden>Download</a>
+        <div class="output" id="resizeOutput"></div>
+      </article>
+
+      <article class="card tool">
+        <h3>13. Image to PDF</h3>
+        <input id="pdfImage" type="file" accept="image/*">
+        <button class="button" onclick="imageToPDF()">Create PDF</button>
+        <a id="pdfDownload" class="button secondary" hidden>Download PDF</a>
+        <div class="output" id="pdfOutput"></div>
+      </article>
+
+      <article class="card tool">
+        <h3>14. QR Code Generator</h3>
+        <input id="qrInput" placeholder="Enter text or a website URL">
+        <button class="button" onclick="generateQR()">Generate QR</button>
+        <div id="qrOutput" class="output"></div>
+      </article>
+
+      <article class="card tool">
+        <h3>15. Text Reverser</h3>
+        <textarea id="reverseInput" placeholder="Enter text..."></textarea>
+        <button class="button" onclick="reverseText()">Reverse Text</button>
+        <div id="reverseOutput" class="output"></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About NOVYX</h2>
+    <p class="muted">NOVYX is a developing software project focused on practical digital tools and future AI technology.</p>
+  </section>
+</main>
+
+<footer>
+  © <span id="year"></span> NOVYX. The Web, Reimagined.
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  document.getElementById("chatForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const input = document.getElementById("question");
+    const chat = document.getElementById("chat");
+    if (!input.value.trim()) return;
+    chat.textContent = "You: " + input.value.trim() +
+      "\n\nNOVYX AI: The AI engine is still in development. This interface is not connected to an AI model.";
+    input.value = "";
+  });
+
+  document.getElementById("words").addEventListener("input", function() {
+    const text = this.value.trim();
+    const words = text ? text.split(/\s+/).length : 0;
+    document.getElementById("wordResult").textContent =
+      "Words: " + words + " | Characters: " + this.value.length;
+  });
+
+  function formatText(type) {
+    const text = document.getElementById("formatInput").value;
+    document.getElementById("formatOutput").textContent =
+      type === "upper" ? text.toUpperCase() : text.toLowerCase();
+  }
+
+  function formatJSON() {
+    const output = document.getElementById("jsonOutput");
+    try {
+      output.textContent = JSON.stringify(
+        JSON.parse(document.getElementById("jsonInput").value), null, 2
+      );
+    } catch {
+      output.textContent = "Invalid JSON. Please check your input.";
+    }
+  }
+
+  function calculatePercent() {
+    const value = Number(document.getElementById("percentValue").value);
+    const rate = Number(document.getElementById("percentRate").value);
+    document.getElementById("percentOutput").textContent =
+      (value * rate / 100).toLocaleString();
+  }
+
+  function convertKm() {
+    const km = Number(document.getElementById("kmValue").value);
+    document.getElementById("kmOutput").textContent =
+      (km * 0.621371).toFixed(3) + " miles";
+  }
+
+  function base64Encode() {
+    try {
+      const text = document.getElementById("baseInput").value;
+      document.getElementById("baseOutput").textContent =
+        btoa(unescape(encodeURIComponent(text)));
+    } catch {
+      document.getElementById("baseOutput").textContent = "Could not encode text.";
+    }
+  }
+
+  function hexToRGB() {
+    let hex = document.getElementById("hexInput").value.trim().replace("#", "");
+    if (/^[0-9a-fA-F]{3}$/.test(hex)) {
+      hex = hex.split("").map(c => c + c).join("");
+    }
+    if (!/^[0-9a-fA-F]{6}$/.test(hex)) {
+      document.getElementById("hexOutput").textContent = "Enter a valid HEX colour.";
+      return;
+    }
+    const n = parseInt(hex, 16);
+    document.getElementById("hexOutput").textContent =
+      `rgb(${n >> 16}, ${(n >> 8) & 255}, ${n & 255})`;
+  }
+
+  function previewHTML() {
+    document.getElementById("htmlPreview").srcdoc =
+      document.getElementById("htmlInput").value;
+  }
+
+  function convertTimestamp() {
+    const value = Number(document.getElementById("timestampInput").value);
+    const date = new Date(value * 1000);
+    document.getElementById("timestampOutput").textContent =
+      Number.isFinite(date.getTime()) ? date.toLocaleString() : "Invalid timestamp.";
+  }
+
+  function generatePassword() {
+    const length = Number(document.getElementById("passwordLength").value);
+    if (!Number.isInteger(length) || length < 8 || length > 64) {
+      document.getElementById("passwordOutput").textContent =
+        "Choose a length between 8 and 64.";
+      return;
+    }
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%&*";
+    const bytes = new Uint8Array(length);
+    crypto.getRandomValues(bytes);
+    document.getElementById("passwordOutput").textContent =
+      Array.from(bytes, b => chars[b % chars.length]).join("");
+  }
+
+  function makeGradient() {
+    const c1 = document.getElementById("colorOne").value;
+    const c2 = document.getElementById("colorTwo").value;
+    const css = `linear-gradient(135deg, ${c1}, ${c2})`;
+    document.getElementById("gradientPreview").style.background = css;
+    document.getElementById("gradientOutput").textContent = `background: ${css};`;
+  }
+
+  function resizeImageFile() {
+    const file = document.getElementById("resizeImage").files[0];
+    const width = Number(document.getElementById("resizeWidth").value);
+    const output = document.getElementById("resizeOutput");
+    if (!file || !Number.isInteger(width) || width < 1) {
+      output.textContent = "Choose an image and enter a valid width.";
+      return;
+    }
+    const image = new Image();
+    const url = URL.createObjectURL(file);
+    image.onload = function() {
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = Math.max(1, Math.round(image.height * width / image.width));
+      canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(function(blob) {
+        if (!blob) {
+          output.textContent = "Could not resize this image.";
+          URL.revokeObjectURL(url);
+          return;
+        }
+        const download = document.getElementById("resizeDownload");
+        download.href = URL.createObjectURL(blob);
+        download.download = "novyx-resized.jpg";
+        download.hidden = false;
+        output.textContent = `Image resized to ${canvas.width} × ${canvas.height}px.`;
+        URL.revokeObjectURL(url);
+      }, "image/jpeg", 0.9);
+    };
+    image.onerror = function() {
+      output.textContent = "Could not open this image.";
+      URL.revokeObjectURL(url);
+    };
+    image.src = url;
+  }
+
+  async function imageToPDF() {
+    const file = document.getElementById("pdfImage").files[0];
+    const output = document.getElementById("pdfOutput");
+    output.textContent = "This tool needs a PDF library. Please add jsPDF before using it.";
+    if (!file) output.textContent = "Choose an image first.";
+  }
+
+  function generateQR() {
+    const text = document.getElementById("qrInput").value.trim();
+    const output = document.getElementById("qrOutput");
+    output.replaceChildren();
+    if (!text) {
+      output.textContent = "Enter text or a URL first.";
+      return;
+    }
+    const image = document.createElement("img");
+    image.alt = "Generated QR code";
+    image.width = 180;
+    image.height = 180;
+    image.src = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" +
+      encodeURIComponent(text);
+    output.appendChild(image);
+  }
+
+  function reverseText() {
+    document.getElementById("reverseOutput").textContent =
+      Array.from(document.getElementById("reverseInput").value).reverse().join("");
+  }
+
+  makeGradient();
+</script>
+
+</body>
+</html>
